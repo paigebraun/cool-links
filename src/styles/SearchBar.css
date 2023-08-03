@@ -1,0 +1,40 @@
+.bx-search {
+    color: #5D6583;
+}
+
+.searchBar {
+    position: relative;
+    background-color: #f1f1f1;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    margin: 21px 0 21px 0;
+}
+
+.searchBar i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 20px;
+    color: #5D6583;
+}
+
+.searchBar .searchInput {
+    height: 100%;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 0 135px 0 65px;
+    font-size: larger;
+}
+
+::placeholder {
+    color: #5D6583;
+}

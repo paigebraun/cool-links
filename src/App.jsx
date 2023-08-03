@@ -1,33 +1,33 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './styles/App.css'
+
+import Header from './components/Header'
+import SearchBar from './components/SearchBar'
+import SideBar from './components/SideBar'
+import AddLink from './components/AddLink'
+
+let root = document.getElementById('root');
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [icon, setIcon] = useState('bx bxs-collection')
+  const [show, setShow] = useState(false);
 
+  function handleBtn() {
+      if (icon == 'bx bxs-collection') {
+          setIcon('bx bx-chevrons-left');
+          root.style.gridTemplateColumns = '1fr 2fr';
+      } else {
+          setIcon('bx bxs-collection');
+          root.style.gridTemplateColumns = '1fr'
+      }
+    }
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <SideBar show={show}/>
+    <div className="appDiv">
+      <Header handleBtn={handleBtn} setShow={setShow} icon={icon} show={show}/>
+      <SearchBar />
+    </div>
     </>
   )
 }

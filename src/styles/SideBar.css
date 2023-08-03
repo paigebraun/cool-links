@@ -1,0 +1,75 @@
+.collectionsAdd {
+    display: flex;
+    color: #5D6583;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
+    margin-left: 7px;
+}
+
+.collectionsAdd p {
+    font-size: 1.2em;
+}
+
+.hide-class {
+    display: none;
+}
+
+.show-class {
+    display: flex;
+    flex-direction: column;
+    background-color: #f1f1f1;
+    height: 100vh;
+    padding: 0 20px;
+}
+
+.collectionsAddBtn {
+    all: unset;
+    cursor: pointer;
+}
+
+.bxs-plus-circle:hover {
+    color:#5B53FF;
+}
+
+.collection:hover {
+    background-color: #d9d9d9;
+}
+
+.collectionBtn {
+    all: unset;
+    cursor: pointer;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
+    padding-left: 20px;
+}
+
+.collection {
+    display: flex;
+    padding: 5px 0;
+    font-size: 1.1em;
+    border-radius: 13px;
+}
+
+.selected {
+    background-color: #5B53FF;
+    color: white;
+}
+
+.deleteCollection {
+    all: unset;
+    cursor: pointer;
+    position: relative;
+    top: 3px;
+    left: -9px;
+    display: none;
+}
+
+.collection:hover .deleteCollection {
+    display: block;
+}
+
+
