@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid';
 import './styles/App.css'
+
 
 import Header from './components/Header'
 import SearchBar from './components/SearchBar'
@@ -8,9 +10,31 @@ import AddLink from './components/AddLink'
 
 let root = document.getElementById('root');
 
+const collections = [
+  { name: "Video", id: uuidv4() },
+  { name: "Programming", id: uuidv4() },
+  { name: "Art", id: uuidv4() }
+];
+
 function App() {
   const [icon, setIcon] = useState('bx bxs-collection')
   const [show, setShow] = useState(false);
+  const [selectCollection, setSelectCollection] = useState('Recent')
+
+  function handleCollectionClick(collection, e) {
+    if (e.target.className === 'collectionBtn'){
+      const selected = document.querySelector('.selected');
+      selected.classList.remove("selected");
+      if (collection === 'Recent') {
+        setSelectCollection('Recent');
+        e.target.parentNode.classList = ["collection selected permanent"]
+      }
+      else {
+        setSelectCollection(collection.name);
+        e.target.parentNode.classList = ["collection selected"];
+      }
+    }
+  }
 
   function handleBtn() {
       if (icon == 'bx bxs-collection') {
@@ -23,10 +47,11 @@ function App() {
     }
   return (
     <>
-    <SideBar show={show}/>
+    <SideBar show={show} handleCollectionClick={handleCollectionClick} selectCollection={selectCollection} setSelectCollection={setSelectCollection} collections={collections}/>
     <div className="appDiv">
-      <Header handleBtn={handleBtn} setShow={setShow} icon={icon} show={show}/>
+      <Header handleBtn={handleBtn} setShow={setShow} icon={icon} show={show} selectCollection={selectCollection} />
       <SearchBar />
+      <AddLink />
     </div>
     </>
   )

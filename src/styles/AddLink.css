@@ -1,0 +1,44 @@
+.addLinkBtn {
+    all: unset;
+    cursor: pointer;
+    background-color: #f1f1f1;
+    padding: 20px 50px;
+    border-radius: 20px;
+    font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.addLinkBtn:hover {
+    background-color: #d9d9d9;
+}
+
+.link {
+    padding: 7px 7px;
+    border-radius: 20px;
+    width: 370px;
+    height: auto;
+    background-color:#f1f1f1;
+    margin: 5px;
+}
+
+.link > img {
+    border-radius: 20px;
+    width: 370px;
+    height: auto;
+}
+
+.link > img:hover {
+    scale: 1.02;
+}
+
+.link > h3 {
+    margin: 5px 0 0px 10px;
+    font-size: 1.3em;
+}
+
+.link > p {
+    margin: 0 0 5px 10px;
+}

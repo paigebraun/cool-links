@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import '../styles/Header.css'
 
-const Header = ({handleBtn, setShow, icon, show}) => {
+const Header = ({handleBtn, setShow, icon, show, selectCollection}) => {
     return (
         <div className="header">
             <button onClick={() => {
@@ -11,7 +11,7 @@ const Header = ({handleBtn, setShow, icon, show}) => {
                 <i className={icon}></i>
             </button>
             <h1>Cool Links</h1>
-            <div className="currentCollection">Recent</div>
+            <div className="currentCollection">{selectCollection}</div>
         </div>
     )
 }
