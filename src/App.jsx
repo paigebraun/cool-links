@@ -6,11 +6,11 @@ import './styles/App.css'
 import Header from './components/Header'
 import SearchBar from './components/SearchBar'
 import SideBar from './components/SideBar'
-import AddLink from './components/AddLink'
+import LinkGrid from './components/LinkGrid'
 
 let root = document.getElementById('root');
 
-const collections = [
+const initialCollections = [
   { name: "Video", id: uuidv4() },
   { name: "Programming", id: uuidv4() },
   { name: "Art", id: uuidv4() }
@@ -47,11 +47,11 @@ function App() {
     }
   return (
     <>
-    <SideBar show={show} handleCollectionClick={handleCollectionClick} selectCollection={selectCollection} setSelectCollection={setSelectCollection} collections={collections}/>
+    <SideBar show={show} handleCollectionClick={handleCollectionClick} selectCollection={selectCollection} setSelectCollection={setSelectCollection} initialCollections={initialCollections}/>
     <div className="appDiv">
       <Header handleBtn={handleBtn} setShow={setShow} icon={icon} show={show} selectCollection={selectCollection} />
       <SearchBar />
-      <AddLink />
+      <LinkGrid />
     </div>
     </>
   )
