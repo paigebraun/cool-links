@@ -22,7 +22,6 @@
 .link {
     padding: 7px 7px;
     border-radius: 20px;
-    width: 370px;
     height: auto;
     background-color:#f1f1f1;
     margin: 5px;
@@ -34,7 +33,9 @@
 
 .link > img {
     border-radius: 20px;
-    width: 370px;
+    width: -webkit-fill-available;
+    width: -moz-fill-available;
+    width: fill-available;
     height: auto;
 }
 
@@ -50,4 +51,65 @@
 .link > p {
     cursor: pointer;
     margin: 0 0 5px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/*ADD LINK COMPONENT*/
+
+.blurBackground {
+    background-color: rgb(125, 125, 125, 0.5);
+    z-index: 1;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.addLink {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 15px;
+    border-radius: 20px;
+    gap: 7px;
+    width: 35vw;
+}
+
+.addLink > input,
+.addLink > button {
+    font-size: 1.2em;
+    all: unset;
+    background-color:#f1f1f1;
+    border-radius: 20px;
+    padding: 5px 0;
+}
+
+.addLink > input {
+   padding-left: 20px;
+}
+
+.addLink > button {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    color: #5D6583;
+}
+
+.addLink > button:hover {
+    background-color: #5B53FF;
+    color: white;
+}
+
+.show-addLink {
+    display: flex;
+}
+
+.hide-addLink {
+    display: none;
 }

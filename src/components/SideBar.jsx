@@ -20,7 +20,6 @@ const SideBar = ({show, handleCollectionClick, initialCollections, setSelectColl
 
     function handleAdd() {
         const newCollections = collections.concat({name: inputValue, id: uuidv4() });
-        console.log(newCollections);
         setCollections(newCollections);
         setShowInput(false);
         setInputValue('');

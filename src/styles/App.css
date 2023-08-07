@@ -13,3 +13,7 @@
   width: -moz-available;
   width: fill-available;
 }
+
+.blurAppDiv > *:not(.blurBackground){
+  filter: blur(5px);
+}
