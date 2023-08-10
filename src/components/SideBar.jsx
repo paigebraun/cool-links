@@ -2,10 +2,9 @@ import '../styles/SideBar.css'
 import { useState, useRef, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-const SideBar = ({show, handleCollectionClick, initialCollections, setSelectCollection}) => {
+const SideBar = ({show, handleCollectionClick, collections, setCollections, setSelectCollection}) => {
 
     const [showInput, setShowInput] = useState(false);
-    const [collections, setCollections] = useState(initialCollections);
     const [inputValue, setInputValue] = useState('');
 
     const inputReference = useRef(null);

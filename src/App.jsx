@@ -17,9 +17,10 @@ const initialCollections = [
 ];
 
 function App() {
-  const [icon, setIcon] = useState('bx bxs-collection')
+  const [icon, setIcon] = useState('bx bxs-collection');
   const [show, setShow] = useState(false);
-  const [selectCollection, setSelectCollection] = useState('Recent')
+  const [selectCollection, setSelectCollection] = useState('Recent');
+  const [collections, setCollections] = useState(initialCollections);
 
   function handleCollectionClick(collection, e) {
     if (e.target.className === 'collectionBtn'){
@@ -47,11 +48,11 @@ function App() {
     }
   return (
     <>
-    <SideBar show={show} handleCollectionClick={handleCollectionClick} selectCollection={selectCollection} setSelectCollection={setSelectCollection} initialCollections={initialCollections}/>
+    <SideBar show={show} handleCollectionClick={handleCollectionClick} selectCollection={selectCollection} setSelectCollection={setSelectCollection} collections={collections} setCollections={setCollections}/>
     <div className="appDiv">
       <Header handleBtn={handleBtn} setShow={setShow} icon={icon} show={show} selectCollection={selectCollection} />
       <SearchBar />
-      <LinkGrid />
+      <LinkGrid collections={collections}/>
     </div>
     </>
   )

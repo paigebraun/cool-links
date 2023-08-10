@@ -16,15 +16,17 @@
 }
 
 .linkTag {
-    all: unset;
-}
-
-.link {
+    position: relative;
     padding: 7px 7px;
     border-radius: 20px;
     height: auto;
-    background-color:#f1f1f1;
+    background-color: #f1f1f1;
     margin: 5px;
+}
+
+.link {
+    all: unset;
+    position: relative;
 }
 
 .link:hover {
@@ -113,3 +115,100 @@
 .hide-addLink {
     display: none;
 }
+
+/* DELETE LINK*/
+
+.deleteLink {
+    all: unset;
+    cursor: pointer;
+    position: absolute;
+    border-radius: 20px;
+    padding: 5px;
+    bottom: 12px;
+    right: 12px;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    background-color: #d9d9d9;
+    display: none;
+}
+
+.linkTag:hover .deleteLink {
+    display: flex;
+}
+
+.linkTag:hover .deleteLink:hover {
+    background-color: #bcbcbc;
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+/* COLLECTION DROPDOWN SELECTOR */
+.dropbtn {
+    background-color:#f1f1f1;
+    color: #5D6583;
+    padding: 5px 20px;
+    font-size: 1.2em;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    display: none;
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    right: 3px;
+    gap: 5px;
+}
+
+.dropdown {
+    position: absolute;
+    top: 22px;
+    right: 20px;
+}
+
+.dropbtn i {
+    font-size: 1.7em;
+    transition: 0.3s;
+}
+
+.dropdown.active .dropbtn i {
+    transform: rotate(-180deg);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    z-index: 1;
+    top: 50px;
+    right: 3px;
+    border-radius: 10px;
+}
+
+.dropdown-content button {
+    display: block;
+    font-size: 1.2em;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
+    border-radius: 10px;
+}
+
+.dropdown-content button:hover {
+    background-color: #d9d9d9;
+}
+
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+.linkTag:hover .dropbtn {
+    display: flex;
+}
+
