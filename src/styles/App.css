@@ -5,6 +5,9 @@
 
 .appDiv {
   padding: 1.5rem;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .appDiv .header {
@@ -12,8 +15,21 @@
   width: -webkit-fill-available;
   width: -moz-available;
   width: fill-available;
+  flex-wrap: wrap;
 }
 
 .blurAppDiv > *:not(.blurBackground){
   filter: blur(5px);
+}
+
+.blurAppDiv {
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 600px ) {
+  #root {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
 }

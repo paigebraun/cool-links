@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Masonry from 'react-masonry-css'
 import { v4 as uuidv4 } from 'uuid';
 
-const LinkGrid = ({filteredList, setFilteredList, collections, selectCollection, savedLinks, setSavedLinks}) => {
+const LinkGrid = ({showEmpty, setShowEmpty, filteredList, setFilteredList, collections, selectCollection, savedLinks, setSavedLinks}) => {
 
     const [showAddLink, setShowAddLink] = useState(false);
     const [linkValue, setLinkValue] = useState('');
@@ -50,6 +50,12 @@ const LinkGrid = ({filteredList, setFilteredList, collections, selectCollection,
                     setFilteredList(newSavedLinks);
                     handleCancel();
                     setLinkValue('');
+
+                    if (newSavedLinks.length !== 0) {
+                        setShowEmpty(!showEmpty);
+                        const emptyScreen = document.querySelector('.emptyScreen');
+                        emptyScreen.classList = ["emptyScreen hide-empty"]
+                    }
                 })
         }
         else {
@@ -63,6 +69,11 @@ const LinkGrid = ({filteredList, setFilteredList, collections, selectCollection,
         const newLinks = savedLinks.filter((savedLink) => savedLink.id !== id);
         setSavedLinks(newLinks); 
         setFilteredList(newLinks);
+        if (newLinks.length === 0) {
+            setShowEmpty(!showEmpty);
+            const emptyScreen = document.querySelector('.emptyScreen');
+            emptyScreen.classList = ["emptyScreen show-empty"]
+        }
     }
 
     //Move a link to a different collection by using the dropdown (available on hover)

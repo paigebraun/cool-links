@@ -82,7 +82,7 @@
     padding: 15px;
     border-radius: 20px;
     gap: 7px;
-    width: 35vw;
+    width: 70vw;
 }
 
 .addLink > input,
@@ -200,6 +200,7 @@
     width: -moz-available;
     width: fill-available;
     border-radius: 10px;
+    background-color: #f1f1f1;
 }
 
 .dropdown-content button:hover {
@@ -226,3 +227,17 @@
   background-clip: padding-box;
 }
 
+@media only screen and (max-width: 600px ) {
+    .linkTag .deleteLink {
+        display: flex;
+    }
+
+    .linkTag .dropdown.active .dropdown-content {
+        display: block;
+    }
+
+    .linkTag .dropbtn {
+        display: flex;
+    }
+
+}

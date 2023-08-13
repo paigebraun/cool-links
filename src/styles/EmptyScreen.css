@@ -1,0 +1,33 @@
+.emptyScreen p {
+    white-space: pre-line;
+    margin: 0;
+    text-align: center;
+}
+
+.emptyScreen i {
+    color: #5B53FF;
+}
+
+.emptyScreen {
+    display: flex;
+    flex-direction: column;
+    color: #5B53FF;
+    font-size: 2em;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.show-empty {
+    display: flex;
+}
+
+.hide-empty {
+    display: none;
+}
+
+@media only screen and (max-width: 600px ) {
+    .emptyScreen {
+        font-size: 1em;
+    }
+}

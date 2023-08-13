@@ -31,3 +31,13 @@ h1, i {
     font-weight: 600;
     border-radius: 25px;
 }
+
+@media only screen and (max-width: 600px ) {
+    .bx-chevrons-left {
+        transform: rotate(90deg);
+    }
+
+    .header {
+        gap: 11px;
+    }
+}

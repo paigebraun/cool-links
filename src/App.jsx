@@ -7,6 +7,7 @@ import Header from './components/Header'
 import SearchBar from './components/SearchBar'
 import SideBar from './components/SideBar'
 import LinkGrid from './components/LinkGrid'
+import EmptyScreen from './components/EmptyScreen'
 
 import generatedSpace from './assets/headimg_small.jpg'
 import fidenza from './assets/tyler-hobbs-fidenza-612.png'
@@ -30,6 +31,7 @@ function App() {
   const [selectCollection, setSelectCollection] = useState('Recent');
   const [collections, setCollections] = useState(initialCollections);
   const [savedLinks, setSavedLinks] = useState(initialLinks);
+  const [showEmpty, setShowEmpty] = useState(false);
 
   //Handle user click on sidbar (selecting a collection)
   function handleCollectionClick(collection, e) {
@@ -90,7 +92,8 @@ function App() {
     <div className="appDiv">
       <Header handleBtn={handleBtn} setShow={setShow} icon={icon} show={show} selectCollection={selectCollection} />
       <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} />
-      <LinkGrid filteredList={filteredList} setFilteredList={setFilteredList} collections={collections} selectCollection={selectCollection} savedLinks={savedLinks} setSavedLinks={setSavedLinks} />
+      <LinkGrid showEmpty={showEmpty} setShowEmpty={setShowEmpty} filteredList={filteredList} setFilteredList={setFilteredList} collections={collections} selectCollection={selectCollection} savedLinks={savedLinks} setSavedLinks={setSavedLinks} />
+      <EmptyScreen />
     </div>
     </>
   )
