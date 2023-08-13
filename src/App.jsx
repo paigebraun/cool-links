@@ -52,7 +52,7 @@ function App() {
     <div className="appDiv">
       <Header handleBtn={handleBtn} setShow={setShow} icon={icon} show={show} selectCollection={selectCollection} />
       <SearchBar />
-      <LinkGrid collections={collections}/>
+      <LinkGrid collections={collections} selectCollection={selectCollection} />
     </div>
     </>
   )

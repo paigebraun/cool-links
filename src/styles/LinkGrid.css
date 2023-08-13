@@ -9,6 +9,9 @@
     flex-direction: column;
     align-items: center;
     margin-top: 5px;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
 }
 
 .addLinkBtn:hover {
@@ -35,9 +38,8 @@
 
 .link > img {
     border-radius: 20px;
-    width: -webkit-fill-available;
-    width: -moz-fill-available;
-    width: fill-available;
+    width: 100%;
+    display: flex;
     height: auto;
 }
 
@@ -204,11 +206,23 @@
     background-color: #d9d9d9;
 }
 
-.dropdown.active .dropdown-content {
+.linkTag:hover .dropdown.active .dropdown-content {
     display: block;
 }
 
 .linkTag:hover .dropbtn {
     display: flex;
+}
+
+/* MASONRY */
+
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  width: auto;
+}
+.my-masonry-grid_column {
+  background-clip: padding-box;
 }
 
