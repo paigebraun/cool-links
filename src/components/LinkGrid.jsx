@@ -1,22 +1,15 @@
 import '../styles/LinkGrid.css'
 import { useState } from 'react'
 import Masonry from 'react-masonry-css'
-import generatedSpace from '../assets/headimg_small.jpg'
-import fidenza from '../assets/tyler-hobbs-fidenza-612.png'
 import { v4 as uuidv4 } from 'uuid';
 
-const LinkGrid = ({collections, selectCollection}) => {
-
-    const initialLinks = [
-        { name: "generated-space", link: "www.generated.space", img: generatedSpace, collection: "Recent", id: uuidv4() },
-        { name: "Fidenza-Tyler Hobbs", link: "www.tylerxhobbs.com/fidenza", img: fidenza, collection: "Recent", id: uuidv4() }
-    ]
+const LinkGrid = ({filteredList, setFilteredList, collections, selectCollection, savedLinks, setSavedLinks}) => {
 
     const [showAddLink, setShowAddLink] = useState(false);
     const [linkValue, setLinkValue] = useState('');
-    const [savedLinks, setSavedLinks] = useState(initialLinks);
     const [dropSelection, setDropSelection] = useState('Recent');
 
+    //Show add link box when add button clicked
     function handleAddLink() {
         const appDiv = document.querySelector('.appDiv');
         setShowAddLink(true);
@@ -29,6 +22,7 @@ const LinkGrid = ({collections, selectCollection}) => {
         appDiv.className = 'appDiv';
     }
 
+    //Show link value as user types it into the input on the add link box
     function handleChange(e) {
         setLinkValue(e.target.value);
     }
@@ -53,21 +47,25 @@ const LinkGrid = ({collections, selectCollection}) => {
                 .then((response) => {
                     const newSavedLinks = savedLinks.concat({name: response.title, link: linkValue, img: response.image, collection: 'Recent', id: uuidv4() });
                     setSavedLinks(newSavedLinks);
+                    setFilteredList(newSavedLinks);
                     handleCancel();
                     setLinkValue('');
                 })
         }
         else {
-            console.log('invalid');
+            console.log(linkValue, ' is an invalid link');
         }
     }
 
+    //Delete a link
     function handleRemoveLink(e, id) {
         e.target.parentNode.parentNode.href = '';
         const newLinks = savedLinks.filter((savedLink) => savedLink.id !== id);
         setSavedLinks(newLinks); 
+        setFilteredList(newLinks);
     }
 
+    //Move a link to a different collection by using the dropdown (available on hover)
     function handleDropdown(e) {
         let parent = e.target.parentNode;
         if (parent.className == 'dropbtn') {
@@ -81,10 +79,12 @@ const LinkGrid = ({collections, selectCollection}) => {
         let update = newSavedLinks.filter((e)=>e.id === id);
         update[0].collection = e.target.innerText;
         setSavedLinks(newSavedLinks);
+        setFilteredList(newSavedLinks);
         setDropSelection(e.target.innerText);
         e.target.parentNode.parentNode.classList.toggle("active");
     }
 
+    //Breakpoints for masonry layout
     const breakpointColumnsObj = {
         default: 4,
         1100: 3,
@@ -96,26 +96,28 @@ const LinkGrid = ({collections, selectCollection}) => {
         <>
             <Masonry breakpointCols={breakpointColumnsObj} className='my-masonry-grid' columnClassName='my-masonry-grid_column'>
                 <button onClick={handleAddLink} className = "addLinkBtn"><i className='bx bx-plus-medical'></i></button>
-                {savedLinks.map((savedLink) => (
-                    savedLink.collection == {selectCollection}.selectCollection ? (
-                    <div key={savedLink.id} className='linkTag'>
-                        <a className='link' href={'https://' + savedLink.link} target="_blank">
-                            <img src={savedLink.img} />
-                            <h3>{savedLink.name}</h3>
-                            <p>{savedLink.link}</p>
-                        </a>
-                        <button onClick={(e) => handleRemoveLink(e, savedLink.id)}className="deleteLink"><i className='bx bxs-trash'></i></button>
-                        <div className='dropdown'>
-                            <button onClick={(e)=> handleDropdown(e)} className="dropbtn">{savedLink.collection}<i className='bx bx-chevron-down'></i></button>
-                            <div className='dropdown-content'>
-                                <button onClick={(e)=>handleDropdownSelection(e, savedLink.id)}>Recent</button>
-                                {collections.map((collection) => (
-                                    <button onClick={(e)=>handleDropdownSelection(e, savedLink.id)} key={collection.id}>{collection.name}</button>
-                                ))}
-                            </div>
-                        </div>
-                    </div>) : null
-                ))}
+                {filteredList.map((item) => {
+                    return (
+                        item.collection == {selectCollection}.selectCollection ? (
+                            <div key={item.id} className='linkTag'>
+                                <a className='link' href={'https://' + item.link} target="_blank">
+                                    <img src={item.img} />
+                                    <h3>{item.name}</h3>
+                                    <p>{item.link}</p>
+                                </a>
+                                <button onClick={(e) => handleRemoveLink(e, item.id)}className="deleteLink"><i className='bx bxs-trash'></i></button>
+                                <div className='dropdown'>
+                                    <button onClick={(e)=> handleDropdown(e)} className="dropbtn">{item.collection}<i className='bx bx-chevron-down'></i></button>
+                                    <div className='dropdown-content'>
+                                        <button onClick={(e)=>handleDropdownSelection(e, item.id)}>Recent</button>
+                                        {collections.map((collection) => (
+                                            <button onClick={(e)=>handleDropdownSelection(e, item.id)} key={collection.id}>{collection.name}</button>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>) : null
+                    )
+                })}
             </Masonry>
         <div className={showAddLink ? 'show-addLink blurBackground' : 'hide-addLink'}>
             <div className="addLink">

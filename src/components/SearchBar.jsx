@@ -1,10 +1,11 @@
 import '../styles/SearchBar.css'
 
-const SearchBar = () => {
+const SearchBar = ({searchQuery, handleSearch}) => {
+
     return(
         <div className="searchBar">
             <i className='bx bx-search'></i>
-            <input type="text" className="searchInput" placeholder="Search"></input>
+            <input type="text" value={searchQuery} className="searchInput" placeholder="Search" onChange={handleSearch}></input>
         </div>
     )
 }
