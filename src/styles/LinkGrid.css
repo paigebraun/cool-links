@@ -20,7 +20,7 @@
 
 .linkTag {
     position: relative;
-    padding: 7px 7px;
+    padding: 4px 4px;
     border-radius: 20px;
     height: auto;
     background-color: #f1f1f1;
@@ -44,7 +44,7 @@
 }
 
 .link > img:hover {
-    scale: 1.02;
+    scale: 1.03;
 }
 
 .link > h3 {

@@ -16,8 +16,10 @@ const LinkGrid = ({showEmpty, setShowEmpty, filteredList, setFilteredList, colle
         appDiv.className = 'appDiv blurAppDiv';
     }
 
+    //Clear link when cancel button clicked
     function handleCancel() {
         const appDiv = document.querySelector('.appDiv');
+        setLinkValue('');
         setShowAddLink(false);
         appDiv.className = 'appDiv';
     }
@@ -33,10 +35,16 @@ const LinkGrid = ({showEmpty, setShowEmpty, filteredList, setFilteredList, colle
         return (res !== null)
     };
 
+    //Add protocol to link if needed
+    function getClickableLink(link) {
+        return link.startsWith("http://") || link.startsWith("https://") ? link : `http://${link}`;
+    };
+
     //Use Link Preview API to get link info
     function handleAdd() {
-        if (isValidURL(linkValue)) {
-            var data = { key: "920fb1aae8a530a3bbe743459af730a7", q: linkValue}
+        let clickLink = getClickableLink(linkValue);
+        if (isValidURL(clickLink)) {
+            var data = { key: "920fb1aae8a530a3bbe743459af730a7", q: clickLink}
 
             fetch("https://api.linkpreview.net", {
                 method: "POST",
@@ -45,12 +53,14 @@ const LinkGrid = ({showEmpty, setShowEmpty, filteredList, setFilteredList, colle
             })
                 .then((res) => res.json())
                 .then((response) => {
-                    const newSavedLinks = savedLinks.concat({name: response.title, link: linkValue, img: response.image, collection: 'Recent', id: uuidv4() });
+                    const newSavedLinks = savedLinks.concat({name: response.title, link: clickLink, img: response.image, collection: 'Recent', id: uuidv4() });
                     setSavedLinks(newSavedLinks);
                     setFilteredList(newSavedLinks);
                     handleCancel();
                     setLinkValue('');
+                    localStorage.setItem("savedLinks", JSON.stringify(newSavedLinks));
 
+                    //Hide empty screen message since we're adding a link
                     if (newSavedLinks.length !== 0) {
                         setShowEmpty(!showEmpty);
                         const emptyScreen = document.querySelector('.emptyScreen');
@@ -74,6 +84,8 @@ const LinkGrid = ({showEmpty, setShowEmpty, filteredList, setFilteredList, colle
             const emptyScreen = document.querySelector('.emptyScreen');
             emptyScreen.classList = ["emptyScreen show-empty"]
         }
+
+        localStorage.setItem("savedLinks", JSON.stringify(newLinks));
     }
 
     //Move a link to a different collection by using the dropdown (available on hover)
@@ -93,6 +105,8 @@ const LinkGrid = ({showEmpty, setShowEmpty, filteredList, setFilteredList, colle
         setFilteredList(newSavedLinks);
         setDropSelection(e.target.innerText);
         e.target.parentNode.parentNode.classList.toggle("active");
+
+        localStorage.setItem("savedLinks", JSON.stringify(newSavedLinks));
     }
 
     //Breakpoints for masonry layout
@@ -111,7 +125,7 @@ const LinkGrid = ({showEmpty, setShowEmpty, filteredList, setFilteredList, colle
                     return (
                         item.collection == {selectCollection}.selectCollection ? (
                             <div key={item.id} className='linkTag'>
-                                <a className='link' href={'https://' + item.link} target="_blank">
+                                <a className='link' href={item.link} target="_blank">
                                     <img src={item.img} />
                                     <h3>{item.name}</h3>
                                     <p>{item.link}</p>

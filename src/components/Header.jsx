@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import '../styles/Header.css'
 
 const Header = ({handleBtn, setShow, icon, show, selectCollection}) => {

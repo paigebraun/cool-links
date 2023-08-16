@@ -9,21 +9,27 @@ const SideBar = ({show, handleCollectionClick, collections, setCollections, setS
 
     const inputReference = useRef(null);
 
+    //Show new input when user wants to add new collection
     function handleInput() {
         setShowInput(true);
     }
 
+    //Show collection name as user is typing it
     function handleChange(event) {
         setInputValue(event.target.value);
     }
 
+    //Add new collection
     function handleAdd() {
         const newCollections = collections.concat({name: inputValue, id: uuidv4() });
         setCollections(newCollections);
         setShowInput(false);
         setInputValue('');
+
+        localStorage.setItem("collections", JSON.stringify(newCollections));
     }
 
+    //Remove collection
     function handleRemove(e, id) {
         const permanent = document.querySelector('.permanent');
         if (e.target.parentNode.parentNode.classList.contains('selected')) {
@@ -33,12 +39,16 @@ const SideBar = ({show, handleCollectionClick, collections, setCollections, setS
         }
         const newCollections = collections.filter((collection) => collection.id !== id);
         setCollections(newCollections); 
+
+        localStorage.setItem("collections", JSON.stringify(newCollections));
     }
 
+    //Set focus on new collection when add button clicked
     useEffect(() => {
         inputReference.current.focus();
     });
 
+    //Monitor when user stops typing to change new collection from input to button
     useEffect(() => {
         const timeout = setTimeout(() => {
             if (inputValue !== '') {

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid';
 import './styles/App.css'
 
 //Import components
@@ -9,21 +8,10 @@ import SideBar from './components/SideBar'
 import LinkGrid from './components/LinkGrid'
 import EmptyScreen from './components/EmptyScreen'
 
-import generatedSpace from './assets/headimg_small.jpg'
-import fidenza from './assets/tyler-hobbs-fidenza-612.png'
-
 let root = document.getElementById('root');
 
-const initialCollections = [
-  { name: "Video", id: uuidv4() },
-  { name: "Programming", id: uuidv4() },
-  { name: "Art", id: uuidv4() }
-];
-
-const initialLinks = [
-  { name: "generated-space", link: "www.generated.space", img: generatedSpace, collection: "Recent", id: uuidv4() },
-  { name: "Fidenza-Tyler Hobbs", link: "www.tylerxhobbs.com/fidenza", img: fidenza, collection: "Recent", id: uuidv4() }
-]
+const initialLinks = JSON.parse(localStorage.getItem("savedLinks") || "[]");
+const initialCollections = JSON.parse(localStorage.getItem("collections") || "[]");
 
 function App() {
   const [icon, setIcon] = useState('bx bxs-collection');
@@ -93,7 +81,7 @@ function App() {
       <Header handleBtn={handleBtn} setShow={setShow} icon={icon} show={show} selectCollection={selectCollection} />
       <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} />
       <LinkGrid showEmpty={showEmpty} setShowEmpty={setShowEmpty} filteredList={filteredList} setFilteredList={setFilteredList} collections={collections} selectCollection={selectCollection} savedLinks={savedLinks} setSavedLinks={setSavedLinks} />
-      <EmptyScreen />
+      <EmptyScreen initialLinks={initialLinks} showEmpty={showEmpty} setShowEmpty={setShowEmpty} />
     </div>
     </>
   )
