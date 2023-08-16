@@ -2,7 +2,9 @@
 
 Seamlessly capture captivating links discovered across the the internet for easy access in the future. Elevate your digital curation prowess as you easily categorize these links into collections. Locate your saved links using intuitive keyword searches.
 
-:arrow_right: [Live Preveiw](https://cool-links.netlify.app/)
+
+
+:arrow_right: [Live Preview](https://cool-links.netlify.app/)
 
 
 ## Screenshots
